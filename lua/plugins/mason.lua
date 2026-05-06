@@ -12,6 +12,13 @@ return {
         -- "rust_analyzer", -- REMOVED - handled by rustaceanvim with system rust-analyzer
         "ts_ls",
         "svelte",
+        "astrols",
+        "html",
+        "cssls",
+        "emmet_ls",
+        "volar",
+        "prismals",
+        "marksman",
         "jsonls",
         "yamlls",
         "pyright",
@@ -219,6 +226,13 @@ return {
       
       -- Add SQL formatting and diagnostics
       vim.list_extend(config.sources, {
+        -- Web development formatting
+        null_ls.builtins.formatting.prettier.with({
+          extra_filetypes = { "svelte", "markdown", "astro" },
+        }),
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.formatting.eslint_d,
+
         -- SQL formatting
         null_ls.builtins.formatting.sql_formatter.with({
           filetypes = { "sql", "sqlite", "psql", "mysql", "plsql" },

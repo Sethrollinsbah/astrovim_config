@@ -15,7 +15,7 @@ return {
 
     -- Load language configurations
     local lang_configs = {}
-    local languages = { "lua", "typescript", "python", "web", "system" }
+    local languages = { "lua", "typescript", "python", "web", "system", "markdown" }
     for _, lang in ipairs(languages) do
       local config = load_lang_config(lang)
       if config.servers then
@@ -41,6 +41,7 @@ return {
           allow_filetypes = {
             "lua", "javascript", "typescript", "json", "yaml", "python", "move",
             "html", "css", "svelte", "sql", "sqlite", "mysql", "psql", "plsql",
+            "markdown",
           },
         },
         disabled = { "rust_analyzer" }, -- Correctly disabled

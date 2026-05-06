@@ -1382,8 +1382,25 @@ return {
         }, -- ======= REMAINING TELESCOPE MAPPINGS =======
 
         ["<leader>fg"] = {
-          function() require("telescope.builtin").live_grep() end,
-          desc = "Live grep",
+          function()
+            local builtin = require "telescope.builtin"
+            
+            -- Check if we're in a git repo
+            local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+            if vim.v.shell_error == 0 then
+              -- In git repo: search in git root
+              builtin.live_grep({
+                cwd = git_root,
+                prompt_title = "Smart Grep (Git Root)",
+              })
+            else
+              -- Not in git repo: search in current directory
+              builtin.live_grep({
+                prompt_title = "Live Grep (CWD)",
+              })
+            end
+          end,
+          desc = "Smart Grep (Ripgrep)",
         },
 
         ["<leader>fb"] = {
@@ -1421,7 +1438,7 @@ return {
         -- LSP info command
         ["<leader>li"] = {
           function()
-            local clients = vim.lsp.get_active_clients { bufnr = 0 }
+            local clients = vim.lsp.get_clients { bufnr = 0 }
             if #clients == 0 then
               vim.notify("No LSP clients attached to current buffer", vim.log.levels.WARN)
               return

@@ -77,7 +77,7 @@ return {
             find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
           },
           live_grep = {
-            additional_args = function() return { "--hidden" } end,
+            additional_args = function() return { "--hidden", "--glob", "!**/.git/*" } end,
           },
           buffers = {
             show_all_buffers = true,

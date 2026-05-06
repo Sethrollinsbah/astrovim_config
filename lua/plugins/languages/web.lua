@@ -50,7 +50,7 @@ return {
             html = {
               completions = {
                 enable = true,
-                emmet = false,
+                emmet = true,
               },
             },
             svelte = {
@@ -64,7 +64,38 @@ return {
                 emmet = true,
               },
             },
+            typescript = {
+              completions = {
+                enable = true,
+              },
+            },
           },
+        },
+      },
+    },
+
+    emmet_ls = {
+      filetypes = {
+        "html",
+        "typescriptreact",
+        "javascriptreact",
+        "css",
+        "sass",
+        "scss",
+        "less",
+        "svelte",
+        "vue",
+        "astro",
+      },
+    },
+
+    astrols = {},
+
+    volar = {
+      filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+      init_options = {
+        vue = {
+          hybridMode = false,
         },
       },
     },
