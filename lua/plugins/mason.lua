@@ -6,6 +6,7 @@ return {
   -- LSP Server Management
   {
     "williamboman/mason-lspconfig.nvim",
+    version = "1.31.0",
     opts = function(_, opts)
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "lua_ls",
