@@ -1,13 +1,9 @@
--- lua/plugins/languages/markdown.lua
--- Markdown language server configuration
-
+-- Standard LazySpec for Markdown
 return {
-  servers = {
-    marksman = {},
+  "neovim/nvim-lspconfig",
+  opts = {
+    servers = {
+      marksman = {},
+    },
   },
-
-  -- Markdown-specific on_attach
-  on_attach = function(client, bufnr)
-    -- Markdown-specific keymaps or logic
-  end,
 }

@@ -1,144 +1,45 @@
--- lua/plugins/languages/web.lua
--- Web development language servers (HTML, CSS, Svelte, etc.)
-
+-- Standard LazySpec for Web
 return {
-  servers = {
-    html = {
-      filetypes = { "html", "templ" },
-      settings = {
-        html = {
-          format = {
-            templating = true,
-            wrapLineLength = 120,
-            wrapAttributes = "auto",
-          },
-          hover = {
-            documentation = true,
-            references = true,
-          },
-        },
+  "neovim/nvim-lspconfig",
+  opts = {
+    servers = {
+      html = {
+        filetypes = { "html", "templ" },
+        settings = { html = { format = { templating = true, wrapLineLength = 120, wrapAttributes = "auto" }, hover = { documentation = true, references = true } } },
       },
-    },
-
-    cssls = {
-      settings = {
-        css = {
-          validate = true,
-          lint = {
-            unknownAtRules = "ignore",
-          },
-        },
-        scss = {
-          validate = true,
-          lint = {
-            unknownAtRules = "ignore",
-          },
-        },
-        less = {
-          validate = true,
-          lint = {
-            unknownAtRules = "ignore",
-          },
-        },
+      cssls = {
+        settings = { css = { validate = true, lint = { unknownAtRules = "ignore" } }, scss = { validate = true, lint = { unknownAtRules = "ignore" } }, less = { validate = true, lint = { unknownAtRules = "ignore" } } },
       },
-    },
-
-    svelte = {
-      settings = {
-        svelte = {
-          plugin = {
-            html = {
-              completions = {
-                enable = true,
-                emmet = true,
-              },
-            },
-            svelte = {
-              completions = {
-                enable = true,
-              },
-            },
-            css = {
-              completions = {
-                enable = true,
-                emmet = true,
-              },
-            },
-            typescript = {
-              completions = {
-                enable = true,
-              },
+      svelte = {
+        settings = {
+          svelte = {
+            plugin = {
+              html = { completions = { enable = true, emmet = true }, hover = { enable = true } },
+              svelte = { completions = { enable = true }, hover = { enable = true } },
+              css = { completions = { enable = true, emmet = true }, hover = { enable = true } },
+              typescript = { completions = { enable = true }, hover = { enable = true }, diagnostics = { enable = true } },
             },
           },
         },
       },
-    },
-
-    emmet_ls = {
-      filetypes = {
-        "html",
-        "typescriptreact",
-        "javascriptreact",
-        "css",
-        "sass",
-        "scss",
-        "less",
-        "svelte",
-        "vue",
-        "astro",
+      emmet_ls = {
+        filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte", "vue", "astro" },
       },
-    },
-
-    astrols = {},
-
-    volar = {
-      filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
-      init_options = {
-        vue = {
-          hybridMode = false,
-        },
+      astrols = {},
+      volar = {
+        filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+        init_options = { vue = { hybridMode = false } },
       },
-    },
-
-    tailwindcss = {
-      filetypes = { "html", "css", "javascript", "typescript", "svelte", "vue", "jsx", "tsx" },
-      settings = {
-        tailwindCSS = {
-          experimental = {
-            classRegex = {
-              "tw`([^`]*)",
-              'tw="([^"]*)',
-              'tw={"([^"}]*)',
-              "tw\\.\\w+`([^`]*)",
-              "tw\\(.*?\\)`([^`]*)",
+      tailwindcss = {
+        filetypes = { "html", "css", "javascript", "typescript", "svelte", "vue", "jsx", "tsx" },
+        settings = {
+          tailwindCSS = {
+            experimental = {
+              classRegex = { "tw`([^`]*)", 'tw="([^"]*)', 'tw={"([^"}]*)', "tw\\.\\w+`([^`]*)", "tw\\(.*?\\)`([^`]*)", },
             },
           },
         },
       },
     },
   },
-
-  -- Web-specific on_attach
-  on_attach = function(client, bufnr)
-    -- Common web development keymaps
-    local opts = { buffer = bufnr, silent = true }
-
-    if client.name == "html" then
-      vim.keymap.set(
-        "n",
-        "<leader>wp",
-        function() vim.cmd "!live-server --port=3000" end,
-        vim.tbl_extend("force", opts, { desc = "Start live server" })
-      )
-    end
-
-    if client.name == "tailwindcss" then
-      vim.keymap.set(
-        "n",
-        "<leader>wt",
-        function() vim.cmd "!npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch" end,
-        vim.tbl_extend("force", opts, { desc = "Watch Tailwind CSS" })
-      )
-    end
-  end,
 }

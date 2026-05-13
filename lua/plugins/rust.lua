@@ -16,7 +16,7 @@ return {
         local opts = { buffer = bufnr, silent = true }
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, vim.tbl_extend("force", opts, { desc = "Hover" }))
         vim.keymap.set("n", "gD", function() vim.lsp.buf.definition() end, vim.tbl_extend("force", opts, { desc = "Go To Definition" }))
-        vim.keymap.set("n", "<leader>ca", function() vim.cmd.RustLsp "codeAction" end, vim.tbl_extend("force", opts, { desc = "Code Action" }))
+        vim.keymap.set("n", "<leader>la", function() vim.cmd.RustLsp "codeAction" end, vim.tbl_extend("force", opts, { desc = "Code Action" }))
         vim.keymap.set("n", "<leader>dr", function() vim.cmd.RustLsp "debuggables" end, vim.tbl_extend("force", opts, { desc = "Rust Debuggables" }))
         vim.keymap.set("n", "<leader>rr", function() vim.cmd.RustLsp "runnables" end, vim.tbl_extend("force", opts, { desc = "Runnables" }))
         vim.keymap.set("n", "<leader>rt", function()
